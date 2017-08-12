@@ -8,8 +8,8 @@ using CarApp.Persistence;
 namespace CarApp.Migrations
 {
     [DbContext(typeof(CarAppDbContext))]
-    [Migration("20170812005931_Init")]
-    partial class Init
+    [Migration("20170812045656_SeedData")]
+    partial class SeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,7 +17,7 @@ namespace CarApp.Migrations
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CarApp.Models.Makes", b =>
+            modelBuilder.Entity("CarApp.Models.Make", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -38,24 +38,23 @@ namespace CarApp.Migrations
 
                     b.Property<int>("MakeId");
 
-                    b.Property<int?>("MakesId");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MakesId");
+                    b.HasIndex("MakeId");
 
                     b.ToTable("Models");
                 });
 
             modelBuilder.Entity("CarApp.Models.Model", b =>
                 {
-                    b.HasOne("CarApp.Models.Makes", "Makes")
+                    b.HasOne("CarApp.Models.Make", "Make")
                         .WithMany("Models")
-                        .HasForeignKey("MakesId");
+                        .HasForeignKey("MakeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

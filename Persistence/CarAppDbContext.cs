@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using CarApp.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace CarApp.Persistence
 {
     public class CarAppDbContext : DbContext
@@ -13,6 +14,6 @@ namespace CarApp.Persistence
           
         }
         DbSet<Model> Models { get; set; }
-        DbSet<Makes> Makes { get; set; }
+        DbSet<Make> Makes { get; set; }
     }
 }

@@ -29,24 +29,23 @@ namespace CarApp.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     MakeId = table.Column<int>(nullable: false),
-                    MakesId = table.Column<int>(nullable: true),
                     Name = table.Column<string>(maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Models", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Models_Makes_MakesId",
-                        column: x => x.MakesId,
+                        name: "FK_Models_Makes_MakeId",
+                        column: x => x.MakeId,
                         principalTable: "Makes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Models_MakesId",
+                name: "IX_Models_MakeId",
                 table: "Models",
-                column: "MakesId");
+                column: "MakeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
